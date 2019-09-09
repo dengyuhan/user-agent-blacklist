@@ -1,3 +1,4 @@
+#搜索引擎
 googlebot
 mediapartners-google
 adsbot-google
@@ -33,3 +34,6 @@ yisouspider
 easouspider
 jikespider
 etaospider
+
+#爬虫
+glutenfreepleasure

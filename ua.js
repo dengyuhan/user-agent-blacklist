@@ -13,41 +13,57 @@ function isIgnore(str) {
 }
 
 fs.readFile("./blacklist.txt", "utf-8", function (error, data) {
-    let option = args.length > 0 ? args[0] : "cf"
+    let option = args[0]
     args.splice(0, 1);
 
     let array = new Array();
 
     let split = data.split("\n");
     for (let i = 0; i < split.length; i++) {
-        if (isIgnore(split[i])) {
-            console.log("忽略", split[i])
+        let it = split[i].trim()
+        if (it.startsWith("#") || it.length <= 0) {
+
+        } else if (isIgnore(it)) {
+            console.log("忽略", it)
         } else {
-            array.push(split[i])
+            array.push(it)
         }
     }
 
     let str = ""
     for (let i = 0; i < array.length; i++) {
         if (option === "cf") {
+            //CloudFlare
             str += '(http.user_agent contains "' + array[i] + '")'
             if (i !== array.length - 1) {
                 str += ' or '
             }
         } else if (option === "regx" || option === "apache") {
+            //正则表达式 Apache
             str += array[i]
             if (i !== array.length - 1) {
                 str += '|'
+            }
+        } else {
+            //换行
+            str += array[i]
+            if (i !== array.length - 1) {
+                str += '\n'
             }
         }
     }
 
     if (option === "apache") {
-        let apache = "#屏蔽所有搜索引擎\n" +
+        let apache = "# .htaccess generated at github user-agent-blacklist\n" +
             "RewriteEngine On\n" +
             "RewriteCond %{HTTP_USER_AGENT} \"" + str + "\" [NC]\n" +
             "RewriteRule .* - [R=404,L]"
-        console.log(apache)
+        fs.writeFile('./.htaccess', apache, function (err) {
+            if (err) {
+                throw err;
+            }
+            console.log(apache)
+        });
     } else {
         console.log(str)
     }
