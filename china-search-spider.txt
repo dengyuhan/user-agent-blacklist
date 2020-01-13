@@ -1,0 +1,15 @@
+# 国内搜索引擎
+baiduspider
+360spider
+haosouspider
+sosospider
+sogou spider
+sogou news spider
+sogou web spider
+sogou inst spider
+sogou spider2
+sogou blog
+sogou orion spider
+yodaobot
+youdaobot
+yisouspider

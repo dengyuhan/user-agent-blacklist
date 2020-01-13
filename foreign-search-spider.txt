@@ -1,0 +1,16 @@
+# 国外搜索引擎
+googlebot
+mediapartners-google
+adsbot-google
+bingbot
+teoma
+ia_archiver
+twiceler
+msnbot
+scrubby
+robozilla
+gigabot
+yahoo-mmcrawler
+yahoo-blogs
+yahoo! slurp china
+yahoo!-adcrawler
